@@ -104,7 +104,7 @@ function App() {
 }
 export default App
 const round5 = x => Math.ceil(x / 5) * 5
-
+const float2int = val => val | 0
 function updateLineChart(d) {
 	let currentTime = new Date(float2int(d.timestamp))
 	const getSeconds = date =>
@@ -120,7 +120,7 @@ function updateLineChart(d) {
 	return newEntry
 }
 
-const float2int = val => val | 0
+
 const seedBarChartData = [
 	{ range: 10, amount: 0 },
 	{ range: 20, amount: 0 },
