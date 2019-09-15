@@ -44,7 +44,6 @@ input {
 }
 ::placeholder {
 	color: #999999;
-	/* padding-left: 12px; */
 	font-size: 14px;
 }
 .App-logo {
