@@ -14,21 +14,19 @@ import {
 import './App.css'
 const URL = 'http://localhost:3001/'
 function App() {
+
+	const [show, setShow] = React.useState(false)
+	const[mostRecentVal,setMostRecent] = React.useState()
 	const [userInput, set] = React.useState(0)
 	const [barChartData, setBarChartData] = React.useState(seedBarChartData)
 	const [lineChartData, setLineChartData] = React.useState(seedLineChartData)
 	React.useEffect(() => {
 		const socket = socketIOClient(URL)
 		socket.on('data', d => {
-			let newInput
+			setMostRecent(float2int(d.value))
 			if (userInput) {
 				if (d.value > userInput) {
-					newInput = prompt(
-						`${float2int(
-							d.value
-						)} is greater than your chosen threshold: ${userInput}. Choose a new value.`
-					)
-					newInput ? set(newInput) : set(0)
+				setShow(true)
 				}
 			}
 			let newLineEntry = updateLineChart(d)
@@ -53,6 +51,12 @@ function App() {
 	}
 	return (
 		<>
+		{show && (
+			<div className='snackbar'>
+		Threshold  reached: {mostRecentVal} 
+		<div className="close" onClick={() => setShow(false)}>×</div>
+		</div>
+		)}
 			<header>
 				Enter an Alert Threshold:
 				<input
@@ -60,7 +64,11 @@ function App() {
 					onChange={e =>
 						Number(e.target.value) >= 0 ? set(Number(e.target.value)) : set(0)
 					}
+					
 				/>
+				
+		
+		
 			</header>
 			<div className="App">
 				<div className="test">
@@ -103,24 +111,21 @@ function App() {
 	)
 }
 export default App
-const round5 = x => Math.ceil(x / 5) * 5
-const float2int = val => val | 0
+
 function updateLineChart(d) {
 	let currentTime = new Date(float2int(d.timestamp))
 	const getSeconds = date =>
 		date
 			.toLocaleTimeString()
-			.split(' ')[0]
-			.slice(5, 7)
 	let timeEntry = getSeconds(currentTime)
 	let newEntry = {
 		value: float2int(d.value),
-		timestamp: round5(Number(timeEntry)),
+		timestamp: timeEntry,
 	}
 	return newEntry
 }
 
-
+const float2int = val => val | 0
 const seedBarChartData = [
 	{ range: 10, amount: 0 },
 	{ range: 20, amount: 0 },
@@ -145,21 +150,4 @@ const seedBarChartData = [
 	{ range: -100, amount: 9 },
 ]
 const seedLineChartData = [
-	{ value: 0, timestamp: 0 },
-	{ value: 0, timestamp: 0 },
-	{ value: 0, timestamp: 0 },
-	{ value: 0, timestamp: 0 },
-	{ value: 0, timestamp: 0 },
-	{ value: 0, timestamp: 5 },
-	{ value: 0, timestamp: 10 },
-	{ value: 0, timestamp: 15 },
-	{ value: 0, timestamp: 20 },
-	{ value: 0, timestamp: 25 },
-	{ value: 0, timestamp: 30 },
-	{ value: 0, timestamp: 35 },
-	{ value: 0, timestamp: 40 },
-	{ value: 0, timestamp: 45 },
-	{ value: 0, timestamp: 50 },
-	{ value: 0, timestamp: 55 },
-	{ value: 0, timestamp: 60 },
 ]
