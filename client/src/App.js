@@ -3,7 +3,7 @@ import socketIOClient from 'socket.io-client'
 import './App.css'
 import LineChartGraph from './LineChart'
 import BarChartGraph from './BarChart'
-const URL = 'http://localhost:3001/'
+import {URL, seedBarChartData, seedLineChartData} from './constants'
 function App() {
 	const [show, setShow] = React.useState(false)
 	const[mostRecentVal,setMostRecent] = React.useState()
@@ -80,27 +80,3 @@ function updateLineChart(d) {
 }
 
 const float2int = val => val | 0
-const seedBarChartData = [
-	{ range: 10, amount: 0 },
-	{ range: 20, amount: 0 },
-	{ range: 30, amount: 0 },
-	{ range: 40, amount: 0 },
-	{ range: 50, amount: 0 },
-	{ range: 60, amount: 0 },
-	{ range: 70, amount: 0 },
-	{ range: 80, amount: 0 },
-	{ range: 90, amount: 0 },
-	{ range: 100, amount: 0 },
-	{ range: 0, amount: 0 },
-	{ range: -10, amount: 0 },
-	{ range: -20, amount: 0 },
-	{ range: -30, amount: 0 },
-	{ range: -40, amount: 0 },
-	{ range: -50, amount: 0 },
-	{ range: -60, amount: 0 },
-	{ range: -70, amount: 0 },
-	{ range: -80, amount: 0 },
-	{ range: -90, amount: 0 },
-	{ range: -100, amount: 9 },
-]
-const seedLineChartData = []
