@@ -10,11 +10,12 @@ function App() {
 	const [userInput, set] = React.useState(0)
 	const [barChartData, setBarChartData] = React.useState(seedBarChartData)
 	const [lineChartData, setLineChartData] = React.useState(seedLineChartData)
+	
 	React.useEffect(() => {
 		const socket = socketIOClient(URL)
 		socket.on('data', data => {
 			setMostRecent(float2int(data.value))
-			if (userInput && data.value > userInput) {
+			if (userInput && Math.abs(mostRecentVal) > userInput) {
 				setShow(true)
 			}
 			let newLineEntry = updateLineChart(data)
@@ -33,14 +34,15 @@ function App() {
 			setBarChartData([...newBarEntry])
 		})
 		return () => socket.close()
-	}, [barChartData, lineChartData, userInput])
+		
+	}, [barChartData, lineChartData, mostRecentVal, userInput])
 	if (!lineChartData) {
 		return <p>Loading....</p>
 	}
 	return (
 		<>
 		{show && (
-			<div className='snackbar'>
+			<div className='snackbar' aria-label='snackbar'>
 		Threshold  reached: {mostRecentVal} 
 		<div className="close" onClick={() => setShow(false)}>×</div>
 		</div>
@@ -48,6 +50,7 @@ function App() {
 			<header>
 				Enter an Alert Threshold:
 				<input
+				    aria-label="input"
 					value={userInput}
 					onChange={e =>
 						Number(e.target.value) >= 0 ? set(Number(e.target.value)) : set(0)
