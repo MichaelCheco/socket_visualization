@@ -9,6 +9,9 @@ import {
 	Legend,
 } from 'recharts'
 const LineChartGraph = ({lineChartData}) => {
+	if (!lineChartData) {
+        return <p data-testid='loading'>Loading ...</p>
+    }
     return (
             <LineChart width={495} height={400} data={lineChartData}>
 						<CartesianGrid strokeDasharray="3 3" />
