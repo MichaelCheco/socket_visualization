@@ -14,10 +14,8 @@ function App() {
 		const socket = socketIOClient(URL)
 		socket.on('data', data => {
 			setMostRecent(float2int(data.value))
-			if (userInput) {
-				if (data.value > userInput) {
+			if (userInput && data.value > userInput) {
 				setShow(true)
-				}
 			}
 			let newLineEntry = updateLineChart(data)
 			function updateBarChart({ value }) {
