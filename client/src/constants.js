@@ -1,0 +1,25 @@
+export const URL = 'http://localhost:3001/'
+export const seedBarChartData = [
+	{ range: 10, amount: 0 },
+	{ range: 20, amount: 0 },
+	{ range: 30, amount: 0 },
+	{ range: 40, amount: 0 },
+	{ range: 50, amount: 0 },
+	{ range: 60, amount: 0 },
+	{ range: 70, amount: 0 },
+	{ range: 80, amount: 0 },
+	{ range: 90, amount: 0 },
+	{ range: 100, amount: 0 },
+	{ range: 0, amount: 0 },
+	{ range: -10, amount: 0 },
+	{ range: -20, amount: 0 },
+	{ range: -30, amount: 0 },
+	{ range: -40, amount: 0 },
+	{ range: -50, amount: 0 },
+	{ range: -60, amount: 0 },
+	{ range: -70, amount: 0 },
+	{ range: -80, amount: 0 },
+	{ range: -90, amount: 0 },
+	{ range: -100, amount: 9 },
+]
+export const seedLineChartData = []
