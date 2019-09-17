@@ -11,6 +11,9 @@ import {
 
 
 const BarChartGraph = ({barChartData}) => {
+	if (!barChartData) {
+        return <p data-testid='loading-bar'>Loading ...</p>
+    }
     return (
         <BarChart width={495} height={400} data={barChartData}>
 					<CartesianGrid strokeDasharray="3 3" />
