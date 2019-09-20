@@ -36,9 +36,7 @@ function App() {
 		return () => socket.close()
 		
 	}, [barChartData, lineChartData, mostRecentVal, userInput])
-	if (!lineChartData) {
-		return <p>Loading....</p>
-	}
+	
 	return (
 		<>
 		{show && (
