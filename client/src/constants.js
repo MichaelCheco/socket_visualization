@@ -1,4 +1,4 @@
-export const URL = 'http://localhost:3001/'
+export const URL =  process.env.REACT_APP_API_URL || 'http://localhost:3001/'
 export const seedBarChartData = [
 	{ range: 10, amount: 0 },
 	{ range: 20, amount: 0 },
